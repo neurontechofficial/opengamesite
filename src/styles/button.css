@@ -1,0 +1,26 @@
+.gui-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 20px;
+    border-radius: var(--gui-radius, 10px);
+    background: var(--gui-accent, #ff4040);
+    color: white;
+
+    border: none;
+    cursor: pointer;
+}
+
+.gui-btn img {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.gui-btn-primary {
+    background: linear-gradient(
+            180deg,
+            var(--gui-accent),
+            #c81f1f
+    );
+}
