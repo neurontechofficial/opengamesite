@@ -1,0 +1,33 @@
+.gui-fps {
+    position: fixed;
+    z-index: 9999;
+
+    font-family: monospace;
+    font-size: 12px;
+
+    padding: 6px 8px;
+    border-radius: 6px;
+
+    user-select: none;
+    cursor: default;
+}
+
+.gui-fps-top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.gui-fps-top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.gui-fps-bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.gui-fps-bottom-right {
+    bottom: 10px;
+    right: 10px;
+}

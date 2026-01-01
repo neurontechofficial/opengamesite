@@ -1,7 +1,7 @@
 {
   "name": "opengamesite",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "description": "A fast bootstrapper and utility libary for building online games websites.",
   "keywords": [
     "games",
