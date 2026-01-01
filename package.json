@@ -1,0 +1,32 @@
+{
+  "name": "opengamesite",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A fast bootstrapper and utility libary for building online games websites.",
+  "keywords": [
+    "games",
+    "bootstrapper",
+    "libary",
+    "util",
+    "utility",
+    "online-games",
+    "neuron-technologies",
+    "game",
+    "quick"
+  ],
+  "homepage": "https://github.com/neurontechofficial/opengamesite#readme",
+  "bugs": {
+    "url": "https://github.com/neurontechofficial/opengamesite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neurontechofficial/opengamesite.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Neuron Technologies",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
