@@ -1,0 +1,11 @@
+.ogs-btn {
+    font-family: system-ui, sans-serif;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.ogs-btn-primary {
+    background: #ff3c3c;
+    color: white;
+}
