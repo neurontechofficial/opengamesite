@@ -1,11 +1,1508 @@
-.ogs-btn {
-    font-family: system-ui, sans-serif;
+/* OpenGameSite UI Kit - Main Stylesheet */
+
+/* ============================================
+   CSS Variables & Theme System
+   ============================================ */
+:root {
+    /* Colors */
+    --gui-primary: #ff4040;
+    --gui-primary-dark: #c81f1f;
+    --gui-primary-light: #ff6b6b;
+    --gui-secondary: #4a90e2;
+    --gui-success: #28a745;
+    --gui-warning: #ffc107;
+    --gui-danger: #dc3545;
+    --gui-info: #17a2b8;
+    
+    /* Neutral Colors */
+    --gui-bg: #ffffff;
+    --gui-bg-secondary: #f8f9fa;
+    --gui-bg-tertiary: #e9ecef;
+    --gui-text: #212529;
+    --gui-text-secondary: #6c757d;
+    --gui-text-muted: #adb5bd;
+    --gui-border: #dee2e6;
+    --gui-border-light: #e9ecef;
+    
+    /* Spacing */
+    --gui-spacing-xs: 4px;
+    --gui-spacing-sm: 8px;
+    --gui-spacing-md: 16px;
+    --gui-spacing-lg: 24px;
+    --gui-spacing-xl: 32px;
+    --gui-spacing-2xl: 48px;
+    
+    /* Typography */
+    --gui-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --gui-font-size-xs: 0.75rem;
+    --gui-font-size-sm: 0.875rem;
+    --gui-font-size-base: 1rem;
+    --gui-font-size-lg: 1.125rem;
+    --gui-font-size-xl: 1.25rem;
+    --gui-font-size-2xl: 1.5rem;
+    --gui-font-size-3xl: 2rem;
+    
+    /* Border Radius */
+    --gui-radius: 10px;
+    --gui-radius-sm: 6px;
+    --gui-radius-lg: 16px;
+    --gui-radius-full: 9999px;
+    
+    /* Shadows */
+    --gui-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --gui-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --gui-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --gui-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --gui-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --gui-transition: all 0.2s ease;
+    --gui-transition-fast: all 0.15s ease;
+    --gui-transition-slow: all 0.3s ease;
+    
+    /* Z-index */
+    --gui-z-dropdown: 1000;
+    --gui-z-sticky: 1020;
+    --gui-z-fixed: 1030;
+    --gui-z-modal-backdrop: 1040;
+    --gui-z-modal: 1050;
+    --gui-z-popover: 1060;
+    --gui-z-tooltip: 1070;
+}
+
+/* Dark Mode */
+[data-theme="dark"],
+.dark-mode {
+    --gui-bg: #1a1a1a;
+    --gui-bg-secondary: #2d2d2d;
+    --gui-bg-tertiary: #3a3a3a;
+    --gui-text: #ffffff;
+    --gui-text-secondary: #b0b0b0;
+    --gui-text-muted: #808080;
+    --gui-border: #404040;
+    --gui-border-light: #2d2d2d;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    color: var(--gui-text);
+    background-color: var(--gui-bg);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+/* ============================================
+   Button Component
+   ============================================ */
+.gui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gui-spacing-sm);
     padding: 12px 20px;
-    border-radius: 8px;
+    border-radius: var(--gui-radius);
+    background: var(--gui-accent, var(--gui-primary));
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--gui-transition);
+    box-shadow: var(--gui-shadow-sm);
+}
+
+.gui-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--gui-shadow);
+}
+
+.gui-btn:active {
+    transform: translateY(0);
+    box-shadow: var(--gui-shadow-sm);
+}
+
+.gui-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.gui-btn img {
+    width: 1.2em;
+    height: 1.2em;
+    object-fit: contain;
+}
+
+.gui-btn-primary {
+    background: linear-gradient(180deg, var(--gui-primary), var(--gui-primary-dark));
+}
+
+.gui-btn-secondary {
+    background: var(--gui-secondary);
+}
+
+.gui-btn-success {
+    background: var(--gui-success);
+}
+
+.gui-btn-danger {
+    background: var(--gui-danger);
+}
+
+.gui-btn-outline {
+    background: transparent;
+    border: 2px solid var(--gui-primary);
+    color: var(--gui-primary);
+}
+
+.gui-btn-outline:hover {
+    background: var(--gui-primary);
+    color: white;
+}
+
+.gui-btn-ghost {
+    background: transparent;
+    color: var(--gui-text);
+    box-shadow: none;
+}
+
+.gui-btn-ghost:hover {
+    background: var(--gui-bg-secondary);
+}
+
+/* ============================================
+   Card Component
+   ============================================ */
+.gui-card {
+    background: var(--gui-bg);
+    border-radius: var(--gui-radius);
+    box-shadow: var(--gui-shadow);
+    overflow: hidden;
+    transition: var(--gui-transition);
+}
+
+.gui-card-hoverable:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--gui-shadow-lg);
+}
+
+.gui-card-clickable {
     cursor: pointer;
 }
 
-.ogs-btn-primary {
-    background: #ff3c3c;
+.gui-card-image {
+    width: 100%;
+    overflow: hidden;
+    background: var(--gui-bg-secondary);
+}
+
+.gui-card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.gui-card-content {
+    padding: var(--gui-spacing-lg);
+}
+
+.gui-card-title {
+    margin: 0 0 var(--gui-spacing-sm) 0;
+    font-size: var(--gui-font-size-lg);
+    font-weight: 600;
+    color: var(--gui-text);
+}
+
+.gui-card-description {
+    margin: var(--gui-spacing-sm) 0;
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-sm);
+}
+
+.gui-card-footer {
+    margin-top: var(--gui-spacing-md);
+    padding-top: var(--gui-spacing-md);
+    border-top: 1px solid var(--gui-border-light);
+}
+
+.gui-card-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--gui-primary);
+    color: white;
+    border-radius: var(--gui-radius-sm);
+    font-size: var(--gui-font-size-xs);
+    font-weight: 600;
+    margin-bottom: var(--gui-spacing-sm);
+}
+
+/* ============================================
+   Modal Component
+   ============================================ */
+.gui-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--gui-z-modal-backdrop);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    padding: var(--gui-spacing-lg);
+}
+
+.gui-modal-backdrop.gui-modal-open {
+    opacity: 1;
+}
+
+.gui-modal-backdrop.gui-modal-closing {
+    opacity: 0;
+}
+
+.gui-modal {
+    background: var(--gui-bg);
+    border-radius: var(--gui-radius-lg);
+    box-shadow: var(--gui-shadow-xl);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: var(--gui-z-modal);
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+}
+
+.gui-modal-backdrop.gui-modal-open .gui-modal {
+    transform: scale(1);
+}
+
+.gui-modal-small {
+    width: 400px;
+}
+
+.gui-modal-medium {
+    width: 600px;
+}
+
+.gui-modal-large {
+    width: 800px;
+}
+
+.gui-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gui-spacing-lg);
+    border-bottom: 1px solid var(--gui-border-light);
+}
+
+.gui-modal-title {
+    margin: 0;
+    font-size: var(--gui-font-size-xl);
+    font-weight: 600;
+}
+
+.gui-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gui-text-secondary);
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--gui-radius-sm);
+    transition: var(--gui-transition);
+}
+
+.gui-modal-close:hover {
+    background: var(--gui-bg-secondary);
+    color: var(--gui-text);
+}
+
+.gui-modal-body {
+    padding: var(--gui-spacing-lg);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.gui-modal-footer {
+    padding: var(--gui-spacing-lg);
+    border-top: 1px solid var(--gui-border-light);
+    display: flex;
+    gap: var(--gui-spacing-sm);
+    justify-content: flex-end;
+}
+
+/* ============================================
+   Navbar Component
+   ============================================ */
+.gui-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gui-spacing-md) var(--gui-spacing-lg);
+    background: var(--gui-bg);
+    border-bottom: 1px solid var(--gui-border-light);
+    box-shadow: var(--gui-shadow-sm);
+}
+
+.gui-navbar-sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--gui-z-sticky);
+}
+
+.gui-navbar-brand {
+    font-size: var(--gui-font-size-xl);
+    font-weight: 700;
+    color: var(--gui-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--gui-spacing-sm);
+}
+
+.gui-navbar-nav {
+    display: flex;
+    gap: var(--gui-spacing-md);
+    align-items: center;
+}
+
+.gui-navbar-item {
+    padding: var(--gui-spacing-sm) var(--gui-spacing-md);
+    color: var(--gui-text-secondary);
+    text-decoration: none;
+    border-radius: var(--gui-radius-sm);
+    transition: var(--gui-transition);
+    font-weight: 500;
+}
+
+.gui-navbar-item:hover,
+.gui-navbar-item.active {
+    color: var(--gui-primary);
+    background: var(--gui-bg-secondary);
+}
+
+.gui-navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gui-text);
+    padding: var(--gui-spacing-sm);
+}
+
+@media (max-width: 768px) {
+    .gui-navbar-toggle {
+        display: block;
+    }
+    
+    .gui-navbar-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--gui-bg);
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--gui-spacing-md);
+        box-shadow: var(--gui-shadow-md);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--gui-transition);
+    }
+    
+    .gui-navbar-mobile-open .gui-navbar-nav {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+/* ============================================
+   Search Component
+   ============================================ */
+.gui-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.gui-search-icon {
+    position: absolute;
+    left: var(--gui-spacing-md);
+    color: var(--gui-text-secondary);
+    pointer-events: none;
+}
+
+.gui-search-input {
+    width: 100%;
+    padding: 12px 16px;
+    padding-left: 40px;
+    border: 2px solid var(--gui-border);
+    border-radius: var(--gui-radius);
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    background: var(--gui-bg);
+    color: var(--gui-text);
+    transition: var(--gui-transition);
+}
+
+.gui-search-input:focus {
+    outline: none;
+    border-color: var(--gui-primary);
+    box-shadow: 0 0 0 3px rgba(255, 64, 64, 0.1);
+}
+
+/* ============================================
+   Badge Component
+   ============================================ */
+.gui-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gui-spacing-xs);
+    padding: 4px 8px;
+    border-radius: var(--gui-radius-full);
+    font-size: var(--gui-font-size-xs);
+    font-weight: 600;
+    background: var(--gui-bg-secondary);
+    color: var(--gui-text);
+}
+
+.gui-badge-primary {
+    background: var(--gui-primary);
     color: white;
 }
+
+.gui-badge-success {
+    background: var(--gui-success);
+    color: white;
+}
+
+.gui-badge-warning {
+    background: var(--gui-warning);
+    color: var(--gui-text);
+}
+
+.gui-badge-danger {
+    background: var(--gui-danger);
+    color: white;
+}
+
+.gui-badge-small {
+    padding: 2px 6px;
+    font-size: 10px;
+}
+
+.gui-badge-large {
+    padding: 6px 12px;
+    font-size: var(--gui-font-size-sm);
+}
+
+.gui-badge-removable {
+    padding-right: 4px;
+}
+
+.gui-badge-remove {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: var(--gui-transition);
+}
+
+.gui-badge-remove:hover {
+    opacity: 1;
+}
+
+/* ============================================
+   Loading Component
+   ============================================ */
+.gui-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gui-spacing-md);
+}
+
+.gui-loading-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: var(--gui-z-modal);
+}
+
+.gui-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gui-border-light);
+    border-top-color: var(--gui-primary);
+    border-radius: 50%;
+    animation: gui-spin 0.8s linear infinite;
+}
+
+.gui-loading-small .gui-spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+}
+
+.gui-loading-large .gui-spinner {
+    width: 60px;
+    height: 60px;
+    border-width: 6px;
+}
+
+@keyframes gui-spin {
+    to { transform: rotate(360deg); }
+}
+
+.gui-loading-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gui-primary);
+    animation: gui-bounce 1.4s ease-in-out infinite both;
+}
+
+.gui-loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.gui-loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes gui-bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+.gui-loading-pulse {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gui-primary);
+    animation: gui-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes gui-pulse {
+    0%, 100% { transform: scale(0); opacity: 1; }
+    50% { transform: scale(1); opacity: 0.5; }
+}
+
+.gui-loading-text {
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-sm);
+}
+
+/* ============================================
+   Tooltip Component
+   ============================================ */
+.gui-tooltip {
+    position: absolute;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: var(--gui-radius-sm);
+    font-size: var(--gui-font-size-xs);
+    pointer-events: none;
+    z-index: var(--gui-z-tooltip);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: var(--gui-transition);
+    white-space: nowrap;
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.gui-tooltip-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gui-tooltip::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+}
+
+.gui-tooltip-top::after {
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+.gui-tooltip-bottom::after {
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: rgba(0, 0, 0, 0.9);
+}
+
+.gui-tooltip-left::after {
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left-color: rgba(0, 0, 0, 0.9);
+}
+
+.gui-tooltip-right::after {
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right-color: rgba(0, 0, 0, 0.9);
+}
+
+/* ============================================
+   Dropdown Component
+   ============================================ */
+.gui-dropdown-menu {
+    position: absolute;
+    background: var(--gui-bg);
+    border-radius: var(--gui-radius);
+    box-shadow: var(--gui-shadow-lg);
+    padding: var(--gui-spacing-xs);
+    min-width: 200px;
+    z-index: var(--gui-z-dropdown);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: var(--gui-transition);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.gui-dropdown-menu.gui-dropdown-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.gui-dropdown-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--gui-border);
+    border-radius: var(--gui-radius-sm);
+    margin-bottom: var(--gui-spacing-xs);
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-sm);
+}
+
+.gui-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--gui-spacing-sm);
+    padding: 10px 12px;
+    border-radius: var(--gui-radius-sm);
+    cursor: pointer;
+    transition: var(--gui-transition);
+    color: var(--gui-text);
+}
+
+.gui-dropdown-item:hover:not(.disabled) {
+    background: var(--gui-bg-secondary);
+}
+
+.gui-dropdown-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.gui-dropdown-divider {
+    height: 1px;
+    background: var(--gui-border-light);
+    margin: var(--gui-spacing-xs) 0;
+}
+
+/* ============================================
+   Tabs Component
+   ============================================ */
+.gui-tabs {
+    display: flex;
+    flex-direction: column;
+}
+
+.gui-tabs-list {
+    display: flex;
+    gap: var(--gui-spacing-sm);
+    border-bottom: 2px solid var(--gui-border-light);
+    overflow-x: auto;
+}
+
+.gui-tab {
+    padding: var(--gui-spacing-md) var(--gui-spacing-lg);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--gui-text-secondary);
+    cursor: pointer;
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    font-weight: 500;
+    transition: var(--gui-transition);
+    margin-bottom: -2px;
+    white-space: nowrap;
+}
+
+.gui-tab:hover {
+    color: var(--gui-text);
+}
+
+.gui-tab.active {
+    color: var(--gui-primary);
+    border-bottom-color: var(--gui-primary);
+}
+
+.gui-tab-panel {
+    padding: var(--gui-spacing-lg) 0;
+}
+
+/* ============================================
+   Progress Component
+   ============================================ */
+.gui-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--gui-bg-secondary);
+    border-radius: var(--gui-radius-full);
+    overflow: hidden;
+}
+
+.gui-progress-bar {
+    height: 100%;
+    background: var(--gui-primary);
+    border-radius: var(--gui-radius-full);
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gui-progress-animated .gui-progress-bar {
+    animation: gui-progress-stripes 1s linear infinite;
+}
+
+.gui-progress-striped .gui-progress-bar {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 1rem 1rem;
+}
+
+@keyframes gui-progress-stripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 1rem 0; }
+}
+
+.gui-progress-label {
+    font-size: var(--gui-font-size-xs);
+    color: white;
+    font-weight: 600;
+}
+
+/* ============================================
+   Rating Component
+   ============================================ */
+.gui-rating {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.gui-rating-star {
+    color: var(--gui-border);
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--gui-transition);
+    line-height: 1;
+}
+
+.gui-rating-small .gui-rating-star {
+    font-size: 16px;
+}
+
+.gui-rating-large .gui-rating-star {
+    font-size: 32px;
+}
+
+.gui-rating-star.active {
+    color: #ffc107;
+}
+
+.gui-rating-readonly .gui-rating-star {
+    cursor: default;
+}
+
+.gui-rating-value {
+    margin-left: var(--gui-spacing-sm);
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-sm);
+}
+
+/* ============================================
+   Avatar Component
+   ============================================ */
+.gui-avatar {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gui-bg-secondary);
+    color: var(--gui-text);
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.gui-avatar-circle {
+    border-radius: var(--gui-radius-full);
+}
+
+.gui-avatar-square {
+    border-radius: var(--gui-radius);
+}
+
+.gui-avatar-small {
+    width: 32px;
+    height: 32px;
+    font-size: var(--gui-font-size-xs);
+}
+
+.gui-avatar-medium {
+    width: 48px;
+    height: 48px;
+    font-size: var(--gui-font-size-base);
+}
+
+.gui-avatar-large {
+    width: 64px;
+    height: 64px;
+    font-size: var(--gui-font-size-lg);
+}
+
+.gui-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gui-avatar-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--gui-bg);
+}
+
+.gui-avatar-status-online {
+    background: var(--gui-success);
+}
+
+.gui-avatar-status-offline {
+    background: var(--gui-text-muted);
+}
+
+.gui-avatar-status-away {
+    background: var(--gui-warning);
+}
+
+.gui-avatar-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--gui-danger);
+    color: white;
+    border-radius: var(--gui-radius-full);
+    font-size: 10px;
+    padding: 2px 6px;
+    min-width: 18px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ============================================
+   Pagination Component
+   ============================================ */
+.gui-pagination {
+    display: flex;
+    gap: var(--gui-spacing-xs);
+    align-items: center;
+    justify-content: center;
+}
+
+.gui-pagination-btn {
+    padding: 8px 12px;
+    border: 1px solid var(--gui-border);
+    background: var(--gui-bg);
+    color: var(--gui-text);
+    border-radius: var(--gui-radius-sm);
+    cursor: pointer;
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    transition: var(--gui-transition);
+    min-width: 40px;
+}
+
+.gui-pagination-btn:hover:not(:disabled) {
+    background: var(--gui-bg-secondary);
+    border-color: var(--gui-primary);
+}
+
+.gui-pagination-btn.active {
+    background: var(--gui-primary);
+    color: white;
+    border-color: var(--gui-primary);
+}
+
+.gui-pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   Carousel Component
+   ============================================ */
+.gui-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--gui-radius);
+}
+
+.gui-carousel-track {
+    position: relative;
+    width: 100%;
+}
+
+.gui-carousel-slide {
+    width: 100%;
+}
+
+.gui-carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gui-carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: var(--gui-spacing-lg);
+}
+
+.gui-carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--gui-radius-full);
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--gui-transition);
+    z-index: 10;
+}
+
+.gui-carousel-prev {
+    left: var(--gui-spacing-md);
+}
+
+.gui-carousel-next {
+    right: var(--gui-spacing-md);
+}
+
+.gui-carousel-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.gui-carousel-indicators {
+    position: absolute;
+    bottom: var(--gui-spacing-md);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--gui-spacing-xs);
+    z-index: 10;
+}
+
+.gui-carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--gui-transition);
+    padding: 0;
+}
+
+.gui-carousel-indicator.active {
+    background: white;
+    width: 24px;
+    border-radius: var(--gui-radius-full);
+}
+
+/* ============================================
+   Game Card Component
+   ============================================ */
+.gui-game-card {
+    background: var(--gui-bg);
+    border-radius: var(--gui-radius);
+    overflow: hidden;
+    box-shadow: var(--gui-shadow);
+    transition: var(--gui-transition);
+    cursor: pointer;
+}
+
+.gui-game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--gui-shadow-lg);
+}
+
+.gui-game-card-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    background: var(--gui-bg-secondary);
+}
+
+.gui-game-card-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gui-game-card-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--gui-transition);
+}
+
+.gui-game-card:hover .gui-game-card-play-overlay {
+    opacity: 1;
+}
+
+.gui-game-card-play-btn {
+    padding: 12px 24px;
+    background: var(--gui-primary);
+    color: white;
+    border: none;
+    border-radius: var(--gui-radius);
+    font-size: var(--gui-font-size-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--gui-transition);
+    transform: scale(0.9);
+}
+
+.gui-game-card:hover .gui-game-card-play-btn {
+    transform: scale(1);
+}
+
+.gui-game-card-play-btn:hover {
+    background: var(--gui-primary-dark);
+}
+
+.gui-game-card-info {
+    padding: var(--gui-spacing-md);
+}
+
+.gui-game-card-title {
+    margin: 0 0 var(--gui-spacing-xs) 0;
+    font-size: var(--gui-font-size-base);
+    font-weight: 600;
+    color: var(--gui-text);
+}
+
+.gui-game-card-category {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--gui-bg-secondary);
+    color: var(--gui-text-secondary);
+    border-radius: var(--gui-radius-sm);
+    font-size: var(--gui-font-size-xs);
+    margin-bottom: var(--gui-spacing-xs);
+}
+
+.gui-game-card-rating {
+    margin: var(--gui-spacing-xs) 0;
+}
+
+.gui-game-card-description {
+    margin: var(--gui-spacing-xs) 0;
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gui-game-card-players {
+    margin-top: var(--gui-spacing-xs);
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-sm);
+}
+
+/* ============================================
+   Category Filter Component
+   ============================================ */
+.gui-category-filter {
+    display: flex;
+    gap: var(--gui-spacing-sm);
+    flex-wrap: wrap;
+}
+
+.gui-category-filter-item {
+    padding: 8px 16px;
+    border: 2px solid var(--gui-border);
+    background: var(--gui-bg);
+    color: var(--gui-text);
+    border-radius: var(--gui-radius-full);
+    cursor: pointer;
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-sm);
+    font-weight: 500;
+    transition: var(--gui-transition);
+}
+
+.gui-category-filter-item:hover {
+    border-color: var(--gui-primary);
+    color: var(--gui-primary);
+}
+
+.gui-category-filter-item.active {
+    background: var(--gui-primary);
+    color: white;
+    border-color: var(--gui-primary);
+}
+
+/* ============================================
+   Game Grid Component
+   ============================================ */
+.gui-game-grid {
+    display: grid;
+    gap: var(--gui-spacing-lg);
+}
+
+@media (max-width: 640px) {
+    .gui-game-grid {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .gui-game-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ============================================
+   Form Components
+   ============================================ */
+.gui-input-wrapper,
+.gui-select-wrapper {
+    margin-bottom: var(--gui-spacing-lg);
+}
+
+.gui-input-label,
+.gui-select-label {
+    display: block;
+    margin-bottom: var(--gui-spacing-xs);
+    font-weight: 500;
+    color: var(--gui-text);
+    font-size: var(--gui-font-size-sm);
+}
+
+.gui-input-label .required {
+    color: var(--gui-danger);
+}
+
+.gui-input-container,
+.gui-select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.gui-input-has-icon-left .gui-input {
+    padding-left: 40px;
+}
+
+.gui-input-has-icon-right .gui-input {
+    padding-right: 40px;
+}
+
+.gui-input-icon {
+    position: absolute;
+    color: var(--gui-text-secondary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.gui-input-icon-left {
+    left: 12px;
+}
+
+.gui-input-icon-right {
+    right: 12px;
+}
+
+.gui-input,
+.gui-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--gui-border);
+    border-radius: var(--gui-radius);
+    font-family: var(--gui-font-family);
+    font-size: var(--gui-font-size-base);
+    background: var(--gui-bg);
+    color: var(--gui-text);
+    transition: var(--gui-transition);
+}
+
+.gui-input:focus,
+.gui-select:focus {
+    outline: none;
+    border-color: var(--gui-primary);
+    box-shadow: 0 0 0 3px rgba(255, 64, 64, 0.1);
+}
+
+.gui-input:disabled,
+.gui-select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--gui-bg-secondary);
+}
+
+.gui-input-error,
+.gui-select-error {
+    border-color: var(--gui-danger);
+}
+
+.gui-input-error-text,
+.gui-select-error-text {
+    display: block;
+    margin-top: var(--gui-spacing-xs);
+    color: var(--gui-danger);
+    font-size: var(--gui-font-size-xs);
+}
+
+.gui-input-helper,
+.gui-select-helper {
+    display: block;
+    margin-top: var(--gui-spacing-xs);
+    color: var(--gui-text-secondary);
+    font-size: var(--gui-font-size-xs);
+}
+
+/* Checkbox & Radio */
+.gui-checkbox-wrapper,
+.gui-radio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--gui-spacing-sm);
+    margin-bottom: var(--gui-spacing-sm);
+}
+
+.gui-checkbox,
+.gui-radio {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--gui-primary);
+}
+
+.gui-checkbox-label,
+.gui-radio-label {
+    cursor: pointer;
+    user-select: none;
+    color: var(--gui-text);
+}
+
+.gui-radio-group {
+    margin-bottom: var(--gui-spacing-lg);
+}
+
+.gui-radio-group-label {
+    display: block;
+    margin-bottom: var(--gui-spacing-sm);
+    font-weight: 500;
+    color: var(--gui-text);
+    font-size: var(--gui-font-size-sm);
+}
+
+.gui-radio-group-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gui-spacing-xs);
+}
+
+/* ============================================
+   Layout Components
+   ============================================ */
+.gui-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gui-container-padding {
+    padding-left: var(--gui-spacing-lg);
+    padding-right: var(--gui-spacing-lg);
+}
+
+.gui-grid {
+    display: grid;
+    gap: var(--gui-spacing-md);
+}
+
+.gui-grid-responsive {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.gui-flex {
+    display: flex;
+}
+
+/* ============================================
+   FPS Component
+   ============================================ */
+.gui-fps {
+    position: fixed;
+    z-index: 9999;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #0f0;
+    user-select: none;
+    cursor: default;
+}
+
+.gui-fps-top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.gui-fps-top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.gui-fps-bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.gui-fps-bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    :root {
+        --gui-spacing-lg: 16px;
+        --gui-spacing-xl: 24px;
+    }
+    
+    .gui-modal-small,
+    .gui-modal-medium,
+    .gui-modal-large {
+        width: 95vw;
+        max-height: 90vh;
+    }
+    
+    .gui-card-content {
+        padding: var(--gui-spacing-md);
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.gui-text-center {
+    text-align: center;
+}
+
+.gui-text-left {
+    text-align: left;
+}
+
+.gui-text-right {
+    text-align: right;
+}
+
+.gui-mt-sm { margin-top: var(--gui-spacing-sm); }
+.gui-mt-md { margin-top: var(--gui-spacing-md); }
+.gui-mt-lg { margin-top: var(--gui-spacing-lg); }
+.gui-mb-sm { margin-bottom: var(--gui-spacing-sm); }
+.gui-mb-md { margin-bottom: var(--gui-spacing-md); }
+.gui-mb-lg { margin-bottom: var(--gui-spacing-lg); }

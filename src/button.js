@@ -1,3 +1,5 @@
+import { applyStyles } from './utils/style.js';
+
 export function button(selector, options = {}) {
     const el = document.querySelector(selector);
     if (!el) return;

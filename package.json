@@ -1,18 +1,21 @@
 {
   "name": "opengamesite",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
-  "description": "A fast bootstrapper and utility libary for building online games websites.",
+  "description": "A comprehensive UI kit for building modern online games websites with beautiful components and game-specific features.",
   "keywords": [
     "games",
-    "bootstrapper",
-    "libary",
-    "util",
+    "ui-kit",
+    "components",
+    "library",
     "utility",
     "online-games",
     "neuron-technologies",
     "game",
-    "quick"
+    "frontend",
+    "ui-components",
+    "game-website",
+    "web-components"
   ],
   "homepage": "https://github.com/neurontechofficial/opengamesite#readme",
   "bugs": {
@@ -25,8 +28,25 @@
   "license": "GPL-3.0-or-later",
   "author": "Neuron Technologies",
   "type": "module",
-  "main": "index.js",
+  "main": "./dist/opengamesite.js",
+  "module": "./dist/opengamesite.js",
+  "exports": {
+    ".": {
+      "import": "./dist/opengamesite.js",
+      "require": "./dist/opengamesite.umd.cjs"
+    },
+    "./styles": "./dist/styles.css"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0"
   }
 }

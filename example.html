@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenGameSite UI Kit - Example</title>
+    <link rel="stylesheet" href="./dist/opengamesite.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Main Container -->
+    <div class="gui-container gui-container-padding" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <!-- Search -->
+        <div id="search" style="max-width: 500px; margin: 2rem auto;"></div>
+
+        <!-- Category Filter -->
+        <div id="categories" style="margin: 2rem 0;"></div>
+
+        <!-- Game Grid -->
+        <div id="games"></div>
+
+        <!-- Example Buttons -->
+        <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button id="btn-primary">Primary Button</button>
+            <button id="btn-secondary">Secondary</button>
+            <button id="btn-outline">Outline</button>
+            <button id="btn-modal">Open Modal</button>
+        </div>
+
+        <!-- Card Example -->
+        <div id="card-example" style="max-width: 400px; margin: 2rem 0;"></div>
+
+        <!-- Rating Example -->
+        <div id="rating-example" style="margin: 2rem 0;"></div>
+
+        <!-- Progress Example -->
+        <div id="progress-example" style="margin: 2rem 0;"></div>
+    </div>
+
+    <script type="module">
+        import { 
+            navbar, 
+            search, 
+            categoryFilter, 
+            gameGrid, 
+            button, 
+            modal, 
+            card, 
+            rating, 
+            progress 
+        } from './dist/opengamesite.js';
+
+        // Navbar
+        navbar('#navbar', {
+            brand: '🎮 GameSite',
+            brandLink: '#',
+            items: [
+                { label: 'Home', href: '#', active: true },
+                { label: 'Games', href: '#' },
+                { label: 'Categories', href: '#' },
+                { label: 'About', href: '#' }
+            ],
+            sticky: true
+        });
+
+        // Search
+        search('#search', {
+            placeholder: 'Search games...',
+            onSearch: (query) => {
+                console.log('Searching for:', query);
+            }
+        });
+
+        // Category Filter
+        categoryFilter('#categories', {
+            categories: ['All', 'Action', 'Adventure', 'Puzzle', 'Racing', 'Sports'],
+            activeCategory: null,
+            onSelect: (category) => {
+                console.log('Selected category:', category);
+            }
+        });
+
+        // Game Grid
+        gameGrid('#games', {
+            games: [
+                {
+                    title: 'Super Adventure Quest',
+                    thumbnail: 'https://via.placeholder.com/400x225?text=Game+1',
+                    description: 'Embark on an epic adventure through mystical lands.',
+                    category: 'Adventure',
+                    rating: 4.5,
+                    players: '1.2M',
+                    playUrl: '#'
+                },
+                {
+                    title: 'Racing Champions',
+                    thumbnail: 'https://via.placeholder.com/400x225?text=Game+2',
+                    description: 'Race against the best drivers in the world.',
+                    category: 'Racing',
+                    rating: 4.8,
+                    players: '850K',
+                    playUrl: '#'
+                },
+                {
+                    title: 'Puzzle Master',
+                    thumbnail: 'https://via.placeholder.com/400x225?text=Game+3',
+                    description: 'Challenge your mind with brain-teasing puzzles.',
+                    category: 'Puzzle',
+                    rating: 4.2,
+                    players: '2.5M',
+                    playUrl: '#'
+                },
+                {
+                    title: 'Action Hero',
+                    thumbnail: 'https://via.placeholder.com/400x225?text=Game+4',
+                    description: 'Fight your way through hordes of enemies.',
+                    category: 'Action',
+                    rating: 4.7,
+                    players: '3.1M',
+                    playUrl: '#'
+                }
+            ],
+            columns: 4,
+            onGameClick: (game) => {
+                console.log('Game clicked:', game);
+            }
+        });
+
+        // Buttons
+        button('#btn-primary', { variant: 'primary' });
+        button('#btn-secondary', { variant: 'secondary' });
+        button('#btn-outline', { variant: 'outline' });
+        
+        button('#btn-modal', {
+            variant: 'primary',
+            style: { accent: '#ff4040' }
+        });
+        
+        document.getElementById('btn-modal').addEventListener('click', () => {
+            modal({
+                title: 'Welcome to GameSite!',
+                content: '<p>This is a modal dialog. You can put any content here.</p>',
+                size: 'medium',
+                onClose: () => {
+                    console.log('Modal closed');
+                }
+            });
+        });
+
+        // Card
+        const cardEl = document.createElement('div');
+        document.getElementById('card-example').appendChild(cardEl);
+        card(cardEl, {
+            title: 'Featured Game',
+            description: 'This is a beautiful card component with title and description.',
+            image: {
+                src: 'https://via.placeholder.com/400x200?text=Card+Image',
+                alt: 'Card image'
+            },
+            badge: 'New',
+            hoverable: true
+        });
+
+        // Rating
+        const ratingEl = document.createElement('div');
+        document.getElementById('rating-example').appendChild(ratingEl);
+        rating(ratingEl, {
+            value: 4,
+            max: 5,
+            readonly: false,
+            showValue: true,
+            onChange: (value) => {
+                console.log('Rating changed to:', value);
+            }
+        });
+
+        // Progress
+        const progressEl = document.createElement('div');
+        document.getElementById('progress-example').appendChild(progressEl);
+        const progressBar = progress(progressEl, {
+            value: 65,
+            max: 100,
+            showLabel: true,
+            animated: true,
+            striped: true
+        });
+
+        // Animate progress
+        setTimeout(() => {
+            progressBar.setValue(85);
+        }, 2000);
+    </script>
+</body>
+</html>
+
